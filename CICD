@@ -1,38 +1,23 @@
-Run actions/checkout@v4
-Syncing repository: khadeharshal/xrwvm-fullstack_developer_capstone
-Getting Git data for refs/heads/main
-HEAD is now at 8f72a4d Update capstone fullstack dealership implementation
-Successfully checked out branch 'main'
+gh run view 18836357268 --verbose
+✓ main Lint Code · 18836357268 Triggered via push about 7 minutes ago
 
-Run actions/setup-python@v5
-with:
-  python-version: 3.11
-Installed Python version 3.11.9
-Successfully set up Python 3.11
-
-Run python -m pip install --upgrade pip
-Requirement already satisfied: pip in /opt/hostedtoolcache/Python/3.11.9/x64/lib/python3.11/site-packages (24.0)
-Collecting flake8
-  Downloading flake8-7.4.1-py2.py3-none-any.whl (57 kB)
-Collecting Django>=3.2
-  Downloading Django-5.2.18-py3-none-any.whl (8.2 MB)
-Collecting requests
-  Downloading requests-2.34.2-py3-none-any.whl (73 kB)
-Collecting python-dotenv
-  Downloading python_dotenv-1.2.4-py3-none-any.whl (23 kB)
-Successfully installed Django-5.2.18 flake8-7.4.1 requests-2.34.2 python-dotenv-1.2.4
-
-Run Lint with flake8
-flake8 server/djangoapp --count --select=E9,F63,F7,F82 --show-source --statistics
-0
-flake8 server/djangoapp --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-0
-
-Run Run Django system checks
-cd server
-python manage.py check
-System check identified no issues (0 silenced).
-
-Post job cleanup.
-Complete job execution: SUCCESS
-All steps completed successfully in 28s.
+JOBS
+✓ Lint Python Files in 16s (ID 53738140285)
+  ✓ Set up job
+  ✓ Checkout Repository
+  ✓ Set up Python
+  ✓ Install dependencies
+  ✓ Print working directory
+  ✓ Run Linter
+  ✓ Post Set up Python
+  ✓ Post Checkout Repository
+  ✓ Complete job
+✓ Lint JavaScript Files in 11s (ID 53738140290)
+  ✓ Set up job
+  ✓ Checkout Repository
+  ✓ Install Node.js
+  ✓ Install JSHint
+  ✓ Run Linter
+  ✓ Post Install Node.js
+  ✓ Post Checkout Repository
+  ✓ Complete job
