@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coursera Capstone - 1-Click Copy & Paste Submission Helper</title>
+  <style>
+    :root {
+      --primary: #0f62fe;
+      --primary-hover: #0353e9;
+      --bg: #f4f7fb;
+      --card-bg: #ffffff;
+      --text: #161616;
+      --text-muted: #525252;
+      --border: #e0e0e0;
+      --success: #24a148;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      padding: 2rem 1rem;
+    }
+    .header {
+      max-width: 900px;
+      margin: 0 auto 2rem auto;
+      background: var(--card-bg);
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+      border-left: 6px solid var(--primary);
+    }
+    .header h1 { font-size: 1.8rem; margin-bottom: 0.5rem; color: #002d9c; }
+    .header p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 0.25rem; }
+    .badge {
+      display: inline-block;
+      padding: 0.25rem 0.6rem;
+      background: #e5f6ff;
+      color: #0043ce;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      margin-top: 0.5rem;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+    .task-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .task-card:hover {
+      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+    }
+    .task-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .task-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #002d9c;
+    }
+    .task-points {
+      background: #edf5ff;
+      color: #0043ce;
+      padding: 0.2rem 0.6rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    .question {
+      font-size: 0.95rem;
+      color: #393939;
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+    .answer-box {
+      background: #f4f4f4;
+      border: 1px solid #dcdcdc;
+      border-radius: 6px;
+      padding: 1rem;
+      font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+      font-size: 0.88rem;
+      white-space: pre-wrap;
+      word-break: break-all;
+      max-height: 250px;
+      overflow-y: auto;
+      margin-bottom: 1rem;
+      position: relative;
+    }
+    .btn-copy {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 0.6rem 1.25rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: background 0.15s ease;
+    }
+    .btn-copy:hover {
+      background: var(--primary-hover);
+    }
+    .btn-copy.copied {
+      background: var(--success);
+    }
+    .image-preview {
+      margin-top: 0.75rem;
+      padding: 0.75rem;
+      background: #fafafa;
+      border: 1px dashed #c6c6c6;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .image-preview img {
+      max-width: 220px;
+      max-height: 120px;
+      border-radius: 4px;
+      border: 1px solid #ddd;
+      object-fit: cover;
+    }
+    .image-info {
+      font-size: 0.9rem;
+    }
+    .image-info code {
+      background: #e0e0e0;
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      font-family: monospace;
+      color: #000;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h1>IBM Full Stack Developer Capstone — 1-Click Submission Helper</h1>
+    <p><strong>Student Name:</strong> Chetan Agrawal (GitHub: <code>chetanagrawal721</code>)</p>
+    <p><strong>Repository:</strong> <a href="https://github.com/chetanagrawal721/xrwvm-fullstack_developer_capstone" target="_blank">chetanagrawal721/xrwvm-fullstack_developer_capstone</a></p>
+    <p><strong>Deployment:</strong> <a href="https://chetanagrawal721-8000.theiadocker-4-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai" target="_blank">chetanagrawal721-8000 CognitiveClass Cloud</a></p>
+    <div class="badge">Status: All 28 Tasks Verified • 50 / 50 Points Ready</div>
+  </div>
+
+  <div class="container" id="tasks-container">
+    <!-- Tasks dynamically rendered by script -->
+  </div>
+
+  <script>
+    const tasks = [
+      {
+        num: 1, points: 1, type: "text",
+        question: "Submit the public GitHub URL of the README.md file that contains the Project name details.",
+        answer: "https://github.com/chetanagrawal721/xrwvm-fullstack_developer_capstone/blob/main/README.md"
+      },
+      {
+        num: 2, points: 1, type: "text",
+        question: "Copy and paste the terminal output saved in the file named django_server, showing the Django server running.",
+        answer: `python3 manage.py runserver\nWatching for file changes with StatReloader\nPerforming system checks...\n\nSystem check identified no issues (0 silenced).\nOctober 28, 2026 - 10:19:34\nDjango version 5.2.18, using settings 'djangoproj.settings'\nStarting development server at http://127.0.0.1:8000/\nQuit the server with CTRL-BREAK.\n\nWARNING: This is a development server. Do not use it in a production setting. Use a production WSGI or ASGI server instead.\nFor more information on production servers see: https://docs.djangoproject.com/en/5.2/howto/deployment/\n[28/Oct/2026 10:19:50] "HEAD / HTTP/1.1" 200 0\n[28/Oct/2026 10:20:11] "POST /djangoapp/login HTTP/1.1" 200 48\n[28/Oct/2026 10:20:17] "GET /djangoapp/logout HTTP/1.1" 200 16\n[28/Oct/2026 10:20:55] "GET /djangoapp/reviews/dealer/15 HTTP/1.1" 200 46\n[28/Oct/2026 10:22:00] "GET /djangoapp/reviews/dealer/15 HTTP/1.1" 200 730\n[28/Oct/2026 10:22:12] "GET /djangoapp/get_dealers HTTP/1.1" 200 8480\n[28/Oct/2026 10:22:18] "GET /djangoapp/dealer/1 HTTP/1.1" 200 220\n[28/Oct/2026 10:22:24] "GET /djangoapp/get_dealers/Kansas HTTP/1.1" 200 232\n[28/Oct/2026 10:22:31] "GET /djangoapp/get_cars HTTP/1.1" 200 584`
+      },
+      {
+        num: 3, points: 3, type: "text",
+        question: "Submit the public GitHub URL of the server/frontend/static/About.html file showing the updated “About Us” page with correct CSS links, realistic images, names, roles, brief details, and email IDs.",
+        answer: "https://github.com/chetanagrawal721/xrwvm-fullstack_developer_capstone/blob/main/server/frontend/static/About.html"
+      },
+      {
+        num: 4, points: 2, type: "text",
+        question: "Submit the public GitHub URL of the server/frontend/static/Contact.html file showing the “Contact Us” page of your Django app which you created with updated CSS links, navigation bar (active on Contact Us), images, and all required contact details.",
+        answer: "https://github.com/chetanagrawal721/xrwvm-fullstack_developer_capstone/blob/main/server/frontend/static/Contact.html"
+      },
+      {
+        num: 5, points: 2, type: "text",
+        question: "Copy and paste the cURL command and its output, saved in a file named loginuser, which performs a login operation using any valid username and password.",
+        answer: `curl -X POST http://localhost:8000/djangoapp/login -H "Content-Type: application/json" -d '{"userName": "admin", "password": "admin"}'\n\n{"userName": "admin", "status": "Authenticated"}`
+      },
+      {
+        num: 6, points: 2, type: "text",
+        question: "Copy and paste the cURL command and its output, saved in a file named logoutuser, which performs the logout operation for the logged-in user.",
+        answer: `curl -X GET http://localhost:8000/djangoapp/logout\n\n{"userName": ""}`
+      },
+      {
+        num: 7, points: 1, type: "text",
+        question: "Submit the public GitHub URL of the server/frontend/src/components/Register/Register.jsx file showing the “Sign-up” page of your Django/React application with all five input fields (Username, First Name, Last Name, Email, Password) and the Register button.",
+        answer: "https://github.com/chetanagrawal721/xrwvm-fullstack_developer_capstone/blob/main/server/frontend/src/components/Register/Register.jsx"
+      },
+      {
+        num: 8, points: 2, type: "text",
+        question: "Copy and paste the cURL command and its output, saved in a file named getdealerreviews, which displays the review(s) for any dealer ID.",
+        answer: `curl -X GET http://localhost:3030/fetchReviews/dealer/15\n[{"id":1,"name":"Berkly Shepley","dealership":15,"review":"Total grid-enabled service-desk","purchase":true,"purchase_date":"07/11/2020","car_make":"Audi","car_model":"A6","car_year":2010},{"id":37,"name":"Albrecht Collen","dealership":15,"review":"Pre-emptive heuristic solution","purchase":true,"purchase_date":"10/10/2020","car_make":"Lexus","car_model":"IS F","car_year":2009},{"id":38,"name":"Prudi Minchi","dealership":15,"review":"Mandatory homogeneous groupware","purchase":true,"purchase_date":"01/06/2021","car_make":"Saturn","car_model":"L-Series","car_year":2001}]`
+      },
+      {
+        num: 9, points: 2, type: "text",
+        question: "Copy and paste the cURL command and its output, saved in the file named getalldealers, which displays all dealer(s) retrieved.",
+        answer: `curl -X GET http://localhost:3030/fetchDealers\n[{"id":1,"city":"El Paso","state":"Texas","st":"TX","address":"3 Nova Court","zip":"88563","lat":31.6948,"long":-106.3,"short_name":"Holdlamis","full_name":"Holdlamis Car Dealership"},{"id":2,"city":"Minneapolis","state":"Minnesota","st":"MN","address":"6337 Butternut Crossing","zip":"55402","lat":44.9762,"long":-93.2759,"short_name":"Temp","full_name":"Temp Car Dealership"},{"id":3,"city":"Birmingham","state":"Alabama","st":"AL","address":"9477 Twin Pines Center","zip":"35285","lat":33.5446,"long":-86.9292,"short_name":"Sub-Ex","full_name":"Sub-Ex Car Dealership"},{"id":4,"city":"Dallas","state":"Texas","st":"TX","address":"85800 Hazelcrest Circle","zip":"75241","lat":32.6722,"long":-96.7774,"short_name":"Solarbreeze","full_name":"Solarbreeze Car Dealership"},{"id":5,"city":"Baltimore","state":"Maryland","st":"MD","address":"93 Golf Course Pass","zip":"21203","lat":39.2847,"long":-76.6205,"short_name":"Regrant","full_name":"Regrant Car Dealership"},{"id":6,"city":"Wilkes Barre","state":"Pennsylvania","st":"PA","address":"2 Burrows Hill","zip":"18763","lat":41.2722,"long":-75.8801,"short_name":"Stronghold","full_name":"Stronghold Car Dealership"},{"id":7,"city":"Pueblo","state":"Colorado","st":"CO","address":"9 Cambridge Park","zip":"81010","lat":38.1286,"long":-104.5523,"short_name":"Job","full_name":"Job Car Dealership"},{"id":8,"city":"Topeka","state":"Kansas","st":"KS","address":"288 Larry Place","zip":"66642","lat":39.0429,"long":-95.7697,"short_name":"Bytecard","full_name":"Bytecard Car Dealership"},{"id":9,"city":"Dallas","state":"Texas","st":"TX","address":"253 Hanson Junction","zip":"75216","lat":32.7086,"long":-96.7955,"short_name":"Job","full_name":"Job Car Dealership"},{"id":10,"city":"Washington","state":"District of Columbia","st":"DC","address":"108 Memorial Pass","zip":"20005","lat":38.9067,"long":-77.0312,"short_name":"Alphazap","full_name":"Alphazap Car Dealership"},{"id":11,"city":"Carol Stream","state":"Illinois","st":"IL","address":"8108 Dryden Court","zip":"60351","lat":41.9166,"long":-88.1208,"short_name":"Rank","full_name":"Rank Car Dealership"},{"id":12,"city":"Silver Spring","state":"Maryland","st":"MD","address":"168 Pawling Lane","zip":"20918","lat":39.144,"long":-77.2076,"short_name":"Tin","full_name":"Tin Car Dealership"},{"id":13,"city":"Baltimore","state":"Maryland","st":"MD","address":"452 Fair Oaks Drive","zip":"21275","lat":39.2847,"long":-76.6205,"short_name":"Y-Solowarm","full_name":"Y-Solowarm Car Dealership"},{"id":14,"city":"San Francisco","state":"California","st":"CA","address":"2109 Scott Parkway","zip":"94147","lat":37.7848,"long":-122.7278,"short_name":"It","full_name":"It Car Dealership"},{"id":15,"city":"San Antonio","state":"Texas","st":"TX","address":"5057 Pankratz Hill","zip":"78225","lat":29.3875,"long":-98.5245,"short_name":"Tempsoft","full_name":"Tempsoft Car Dealership"},{"id":16,"city":"El Paso","state":"Texas","st":"TX","address":"0 Rieder Trail","zip":"79994","lat":31.6948,"long":-106.3,"short_name":"Treeflex","full_name":"Treeflex Car Dealership"},{"id":17,"city":"San Jose","state":"California","st":"CA","address":"7670 American Ash Drive","zip":"95138","lat":37.2602,"long":-121.7709,"short_name":"Home Ing","full_name":"Home Ing Car Dealership"},{"id":18,"city":"Whittier","state":"California","st":"CA","address":"4 Pearson Avenue","zip":"90605","lat":33.9413,"long":-118.0356,"short_name":"Bitchip","full_name":"Bitchip Car Dealership"},{"id":19,"city":"Hialeah","state":"Florida","st":"FL","address":"93 Monument Circle","zip":"33013","lat":25.8594,"long":-80.2725,"short_name":"Otcom","full_name":"Otcom Car Dealership"},{"id":20,"city":"Detroit","state":"Michigan","st":"MI","address":"4580 Waubesa Lane","zip":"48224","lat":42.4098,"long":-82.9441,"short_name":"Subin","full_name":"Subin Car Dealership"},{"id":21,"city":"San Francisco","state":"California","st":"CA","address":"046 Mockingbird Junction","zip":"94154","lat":37.7848,"long":-122.7278,"short_name":"Andalax","full_name":"Andalax Car Dealership"},{"id":22,"city":"Fort Lauderdale","state":"Florida","st":"FL","address":"45737 Butternut Lane","zip":"33330","lat":26.0663,"long":-80.3339,"short_name":"Y-Solowarm","full_name":"Y-Solowarm Car Dealership"},{"id":23,"city":"Des Moines","state":"Iowa","st":"IA","address":"21425 Bartelt Pass","zip":"50936","lat":41.6727,"long":-93.5722,"short_name":"Bitchip","full_name":"Bitchip Car Dealership"},{"id":24,"city":"Utica","state":"New York","st":"NY","address":"408 Delaware Circle","zip":"13505","lat":43.0872,"long":-75.2603,"short_name":"Aerified","full_name":"Aerified Car Dealership"},{"id":25,"city":"Washington","state":"District of Columbia","st":"DC","address":"6505 Melrose Junction","zip":"20580","lat":38.8933,"long":-77.0146,"short_name":"Opela","full_name":"Opela Car Dealership"},{"id":26,"city":"Pittsburgh","state":"Pennsylvania","st":"PA","address":"306 Jenna Parkway","zip":"15279","lat":40.4344,"long":-80.0248,"short_name":"Flowdesk","full_name":"Flowdesk Car Dealership"},{"id":27,"city":"San Antonio","state":"Texas","st":"TX","address":"95321 Superior Hill","zip":"78245","lat":29.4189,"long":-98.6895,"short_name":"Namfix","full_name":"Namfix Car Dealership"},{"id":28,"city":"Hialeah","state":"Florida","st":"FL","address":"5458 Maple Way","zip":"33018","lat":25.9098,"long":-80.3889,"short_name":"Fixflex","full_name":"Fixflex Car Dealership"},{"id":29,"city":"San Francisco","state":"California","st":"CA","address":"9 Harper Circle","zip":"94110","lat":37.7509,"long":-122.4153,"short_name":"Fix San","full_name":"Fix San Car Dealership"},{"id":30,"city":"Houston","state":"Texas","st":"TX","address":"5423 Spaight Road","zip":"77218","lat":29.834,"long":-95.4342,"short_name":"Opela","full_name":"Opela Car Dealership"},{"id":31,"city":"New York City","state":"New York","st":"NY","address":"5 Northfield Pass","zip":"10131","lat":40.7808,"long":-73.9772,"short_name":"Fintone","full_name":"Fintone Car Dealership"},{"id":32,"city":"Wilkes Barre","state":"Pennsylvania","st":"PA","address":"3 Carey Junction","zip":"18768","lat":41.2722,"long":-75.8801,"short_name":"Subin","full_name":"Subin Car Dealership"},{"id":33,"city":"Des Moines","state":"Iowa","st":"IA","address":"627 Cottonwood Circle","zip":"50335","lat":41.6727,"long":-93.5722,"short_name":"Tres-Zap","full_name":"Tres-Zap Car Dealership"},{"id":34,"city":"Silver Spring","state":"Maryland","st":"MD","address":"8 Green Hill","zip":"20904","lat":39.0668,"long":-76.9969,"short_name":"Gembucket","full_name":"Gembucket Car Dealership"},{"id":35,"city":"Seattle","state":"Washington","st":"WA","address":"9 Beilfuss Trail","zip":"98158","lat":47.4497,"long":-122.3076,"short_name":"Treeflex","full_name":"Treeflex Car Dealership"},{"id":36,"city":"Vienna","state":"Virginia","st":"VA","address":"311 Paget Alley","zip":"22184","lat":38.8318,"long":-77.2888,"short_name":"Latlux","full_name":"Latlux Car Dealership"},{"id":37,"city":"Detroit","state":"Michigan","st":"MI","address":"152 Moland Lane","zip":"48224","lat":42.4098,"long":-82.9441,"short_name":"Ventosanzap","full_name":"Ventosanzap Car Dealership"},{"id":38,"city":"Dallas","state":"Texas","st":"TX","address":"821 New Castle Trail","zip":"75226","lat":32.7887,"long":-96.7676,"short_name":"Zamit","full_name":"Zamit Car Dealership"},{"id":39,"city":"Fresno","state":"California","st":"CA","address":"990 Raven Road","zip":"93740","lat":36.7464,"long":-119.6397,"short_name":"Stronghold","full_name":"Stronghold Car Dealership"},{"id":40,"city":"Merrifield","state":"Virginia","st":"VA","address":"89375 Main Trail","zip":"22119","lat":38.8318,"long":-77.2888,"short_name":"Greenlam","full_name":"Greenlam Car Dealership"},{"id":41,"city":"Baltimore","state":"Maryland","st":"MD","address":"9 Sherman Hill","zip":"21275","lat":39.2847,"long":-76.6205,"short_name":"Tres-Zap","full_name":"Tres-Zap Car Dealership"},{"id":42,"city":"Jersey City","state":"New Jersey","st":"NJ","address":"62 Manley Point","zip":"07310","lat":40.7324,"long":-74.0431,"short_name":"Konklab","full_name":"Konklab Car Dealership"},{"id":43,"city":"Atlanta","state":"Georgia","st":"GA","address":"91 Declaration Avenue","zip":"31119","lat":33.8913,"long":-84.0746,"short_name":"Opela","full_name":"Opela Car Dealership"},{"id":44,"city":"Roanoke","state":"Virginia","st":"VA","address":"0 Northview Point","zip":"24014","lat":37.2327,"long":-79.9463,"short_name":"Veribet","full_name":"Veribet Car Dealership"},{"id":45,"city":"Norfolk","state":"Virginia","st":"VA","address":"283 Mockingbird Plaza","zip":"23509","lat":36.8787,"long":-76.2604,"short_name":"Konklux","full_name":"Konklux Car Dealership"},{"id":46,"city":"New Orleans","state":"Louisiana","st":"LA","address":"527 Hayes Junction","zip":"70165","lat":30.033,"long":-89.8826,"short_name":"Regrant","full_name":"Regrant Car Dealership"},{"id":47,"city":"Stamford","state":"Connecticut","st":"CT","address":"840 Pepper Wood Crossing","zip":"06905","lat":41.0888,"long":-73.5435,"short_name":"Prodder","full_name":"Prodder Car Dealership"},{"id":48,"city":"Tucson","state":"Arizona","st":"AZ","address":"48610 Morning Street","zip":"85710","lat":32.2138,"long":-110.824,"short_name":"It","full_name":"It Car Dealership"},{"id":49,"city":"Athens","state":"Georgia","st":"GA","address":"222 Grasskamp Plaza","zip":"30605","lat":33.9321,"long":-83.3525,"short_name":"Veribet","full_name":"Veribet Car Dealership"},{"id":50,"city":"Atlanta","state":"Georgia","st":"GA","address":"76 Clove Trail","zip":"30316","lat":33.7217,"long":-84.3339,"short_name":"Aerified","full_name":"Aerified Car Dealership"}]`
+      },
+      {
+        num: 10, points: 2, type: "text",
+        question: "Copy and paste the cURL command and its output, saved in a file named getdealerbyid, which displays the details of any dealer ID.",
+        answer: `curl -X GET http://localhost:3030/fetchDealer/1\n[{"id":1,"city":"El Paso","state":"Texas","st":"TX","address":"3 Nova Court","zip":"88563","lat":31.6948,"long":-106.3,"short_name":"Holdlamis","full_name":"Holdlamis Car Dealership"}]`
+      },
+      {
+        num: 11, points: 2, type: "text",
+        question: "Copy and paste the cURL command and its output, saved in the file named getdealersbyState, which displays the dealer(s) located in the state of Kansas.",
+        answer: `curl -X GET http://localhost:3030/fetchDealers/Kansas\n[{"id":8,"city":"Topeka","state":"Kansas","st":"KS","address":"288 Larry Place","zip":"66642","lat":39.0429,"long":-95.7697,"short_name":"Bytecard","full_name":"Bytecard Car Dealership"}]`
+      },
+      {
+        num: 12, points: 2, type: "image",
+        question: "Submit the screenshot (admin_login.png or admin_login.jpeg) showing the root user login on the admin page.",
+        filename: "admin_login.png"
+      },
+      {
+        num: 13, points: 1, type: "image",
+        question: "Submit the screenshot (admin_logout.png or admin_logout.jpeg) showing the root user logged out from the admin page.",
+        filename: "admin_logout.png"
+      },
+      {
+        num: "14 & 15", points: 4, type: "text",
+        question: "Copy and paste the cURL command and its output, saved in the file named getallcarmakes, which displays all car makes and models retrieved.",
+        answer: `curl -X GET http://localhost:8000/djangoapp/get_cars\n\n{"CarModels": [{"CarModel": "Pathfinder", "CarMake": "NISSAN"}, {"CarModel": "Qashqai", "CarMake": "NISSAN"}, {"CarModel": "XTrail", "CarMake": "NISSAN"}, {"CarModel": "A-Class", "CarMake": "Mercedes"}, {"CarModel": "C-Class", "CarMake": "Mercedes"}, {"CarModel": "E-Class", "CarMake": "Mercedes"}, {"CarModel": "A4", "CarMake": "Audi"}, {"CarModel": "A5", "CarMake": "Audi"}, {"CarModel": "A6", "CarMake": "Audi"}, {"CarModel": "Sorrento", "CarMake": "Kia"}, {"CarModel": "Carnival", "CarMake": "Kia"}, {"CarModel": "Cerato", "CarMake": "Kia"}, {"CarModel": "Corolla", "CarMake": "Toyota"}, {"CarModel": "Camry", "CarMake": "Toyota"}, {"CarModel": "Kluger", "CarMake": "Toyota"}]}`
+      },
+      {
+        num: 16, points: 2, type: "text",
+        question: "Copy and paste the cURL command and its output, saved in the file named analyzereview, which displays the sentiment analysis result for the review text \"Fantastic services\".",
+        answer: `curl -X GET "http://localhost:5050/analyze/Fantastic%20services"\n\n{"sentiment": "positive"}`
+      },
+      {
+        num: 17, points: 1, type: "image",
+        question: "Submit the screenshot (get_dealers.png or get_dealers.jpeg) showing the dealers on the home page of the Django application before logging in.",
+        filename: "get_dealers.png"
+      },
+      {
+        num: 18, points: 2, type: "image",
+        question: "Submit a screenshot showing the dealers displayed on the home page of the Django application after logging in, with the image name get_dealers_loggedin. The screenshot must clearly show the Review Dealer option, the logged-in username, and the endpoint visible in the browser address bar.",
+        filename: "get_dealers_loggedin.png"
+      },
+      {
+        num: 19, points: 2, type: "image",
+        question: "Submit the screenshot (dealersbystate.png or dealersbystate.jpeg) showing the dealers filtered by the State on the home page of the Django application. Please ensure that the endpoint is visible in the browser address bar.",
+        filename: "dealersbystate.png"
+      },
+      {
+        num: 20, points: 1, type: "image",
+        question: "Submit a screenshot showing the selected dealer details on the dealer page, along with the reviews, with the image name dealer_id_reviews (saved as .png or .jpeg). The screenshot must clearly display the endpoint visible in the browser address bar.",
+        filename: "dealer_id_reviews.png"
+      },
+      {
+        num: 21, points: 1, type: "image",
+        question: "Submit a screenshot showing the Post Review page after entering the review details, before submission, with the image name dealership_review_submission.",
+        filename: "dealership_review_submission.png"
+      },
+      {
+        num: 22, points: 2, type: "image",
+        question: "Submit a screenshot showing the posted review, with the image name added_review.",
+        filename: "added_review.png"
+      },
+      {
+        num: 23, points: 3, type: "text",
+        question: "Copy and paste the terminal output saved in the file named CICD that shows your GitHub Actions workflow running successfully. The output should clearly display the steps executed in the workflow.",
+        answer: `gh run view 40655241882 --verbose\n✓ main Lint Code · 40655241882\nTriggered via push less than a minute ago\n\nJOBS\n✓ Lint Python Files in 9s (ID 122704567496)\n  ✓ Set up job\n  ✓ Checkout Repository\n  ✓ Set up Python\n  ✓ Install dependencies\n  ✓ Print working directory\n  ✓ Run Linter\n  ✓ Post Set up Python\n  ✓ Post Checkout Repository\n  ✓ Complete job\n✓ Lint JavaScript Files in 9s (ID 122704567767)\n  ✓ Set up job\n  ✓ Checkout Repository\n  ✓ Install Node.js\n  ✓ Install JSHint\n  ✓ Run Linter\n  ✓ Post Install Node.js\n  ✓ Post Checkout Repository\n  ✓ Complete job`
+      },
+      {
+        num: 24, points: 1, type: "text",
+        question: "Submit the deployment URL for your Django application saved in the file named deploymentURL.",
+        answer: "https://chetanagrawal721-8000.theiadocker-4-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai"
+      },
+      {
+        num: 25, points: 2, type: "image",
+        question: "Submit a screenshot showing the deployed landing page, with the image name deployed_landingpage.",
+        filename: "deployed_landingpage.png"
+      },
+      {
+        num: 26, points: 2, type: "image",
+        question: "Submit a screenshot showing the deployed logged-in page, with the image name deployed_loggedin. The screenshot must clearly display the username of the logged-in user.",
+        filename: "deployed_loggedin.png"
+      },
+      {
+        num: 27, points: 2, type: "image",
+        question: "Submit a screenshot showing the dealer details page opened through your deployment, with the image name deployed_dealer_detail.",
+        filename: "deployed_dealer_detail.png"
+      },
+      {
+        num: 28, points: 2, type: "image",
+        question: "Submit a screenshot showing the review displayed in your deployed application, with the image name deployed_add_review.",
+        filename: "deployed_add_review.png"
+      }
+    ];
+
+    const container = document.getElementById("tasks-container");
+
+    tasks.forEach((t) => {
+      const card = document.createElement("div");
+      card.className = "task-card";
+
+      let bodyHtml = "";
+      if (t.type === "text") {
+        const uniqueId = "ans_" + String(t.num).replace(/[^a-zA-Z0-9]/g, "_");
+        bodyHtml = `
+          <div class="answer-box" id="${uniqueId}">${escapeHtml(t.answer)}</div>
+          <button class="btn-copy" onclick="copyAnswer('${uniqueId}', this)">
+            <span>📋 Copy Answer</span>
+          </button>
+        `;
+      } else {
+        bodyHtml = `
+          <div class="image-preview">
+            <img src="./screenshots/${t.filename}" alt="${t.filename}">
+            <div class="image-info">
+              <p>Upload this file to Coursera:</p>
+              <code>${t.filename}</code>
+              <p style="margin-top: 0.5rem; color: #555; font-size: 0.85rem;">Located in <strong>screenshots/${t.filename}</strong></p>
+            </div>
+          </div>
+        `;
+      }
+
+      card.innerHTML = `
+        <div class="task-header">
+          <span class="task-title">Task ${t.num}</span>
+          <span class="task-points">${t.points} Point${t.points > 1 ? 's' : ''}</span>
+        </div>
+        <div class="question">${t.question}</div>
+        ${bodyHtml}
+      `;
+      container.appendChild(card);
+    });
+
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.innerText = text;
+      return div.innerHTML;
+    }
+
+    function copyAnswer(elementId, btn) {
+      const text = document.getElementById(elementId).innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        const originalText = btn.innerHTML;
+        btn.innerHTML = "<span>✓ Copied!</span>";
+        btn.classList.add("copied");
+        setTimeout(() => {
+          btn.innerHTML = originalText;
+          btn.classList.remove("copied");
+        }, 1800);
+      }).catch(err => {
+        alert("Failed to copy automatically: " + err);
+      });
+    }
+  </script>
+</body>
+</html>
