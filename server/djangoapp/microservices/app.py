@@ -1,6 +1,15 @@
+import os
+import json
+import nltk
 from flask import Flask
 from nltk.sentiment import SentimentIntensityAnalyzer
-import json
+
+# Configure NLTK data search paths for bundled vader_lexicon
+base_dir = os.path.dirname(os.path.abspath(__file__))
+nltk.data.path.append(base_dir)
+nltk.data.path.append(os.path.join(base_dir, 'sentiment'))
+nltk.data.path.append(os.path.abspath(os.path.join(base_dir, '..', '..', '..', 'nltk_data')))
+
 app = Flask("Sentiment Analyzer")
 
 sia = SentimentIntensityAnalyzer()

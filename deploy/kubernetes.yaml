@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dealership-web-deployment
+  labels:
+    app: dealership-web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dealership-web
+  template:
+    metadata:
+      labels:
+        app: dealership-web
+    spec:
+      containers:
+      - name: dealership-web
+        image: chetanagrawal721/dealership-capstone:latest
+        ports:
+        - containerPort: 8000
+        env:
+        - name: PORT
+          value: "8000"
+        resources:
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+          requests:
+            cpu: "200m"
+            memory: "256Mi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dealership-web-service
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 8000
+  selector:
+    app: dealership-web

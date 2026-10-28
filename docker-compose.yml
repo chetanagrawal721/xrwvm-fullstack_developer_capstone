@@ -1,0 +1,48 @@
+version: '3.9'
+
+services:
+  mongo_db:
+    image: mongo:latest
+    container_name: dealership_mongo
+    ports:
+      - "27017:27017"
+    restart: always
+    volumes:
+      - mongo_data:/data/db
+
+  dealership_service:
+    build:
+      context: ./server/database
+      dockerfile: Dockerfile
+    container_name: dealership_node_api
+    ports:
+      - "3030:3030"
+    environment:
+      - MONGO_URL=mongodb://mongo_db:27017/
+    depends_on:
+      - mongo_db
+
+  sentiment_service:
+    build:
+      context: ./server/djangoapp/microservices
+      dockerfile: Dockerfile
+    container_name: dealership_sentiment_api
+    ports:
+      - "5050:5050"
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: dealership_django_web
+    ports:
+      - "8000:8000"
+    environment:
+      - backend_url=http://dealership_service:3030
+      - sentiment_analyzer_url=http://sentiment_service:5050/
+    depends_on:
+      - dealership_service
+      - sentiment_service
+
+volumes:
+  mongo_data:
