@@ -1,0 +1,20 @@
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+October 28, 2026 - 10:19:34
+Django version 5.2.18, using settings 'djangoproj.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CTRL-BREAK.
+
+WARNING: This is a development server. Do not use it in a production setting. Use a production WSGI or ASGI server instead.
+For more information on production servers see: https://docs.djangoproject.com/en/5.2/howto/deployment/
+[28/Oct/2026 10:19:50] "HEAD / HTTP/1.1" 200 0
+[28/Oct/2026 10:20:11] "POST /djangoapp/login HTTP/1.1" 200 48
+[28/Oct/2026 10:20:17] "GET /djangoapp/logout HTTP/1.1" 200 16
+[28/Oct/2026 10:20:55] "GET /djangoapp/reviews/dealer/15 HTTP/1.1" 200 46
+[28/Oct/2026 10:22:00] "GET /djangoapp/reviews/dealer/15 HTTP/1.1" 200 730
+[28/Oct/2026 10:22:12] "GET /djangoapp/get_dealers HTTP/1.1" 200 8480
+[28/Oct/2026 10:22:18] "GET /djangoapp/dealer/1 HTTP/1.1" 200 220
+[28/Oct/2026 10:22:24] "GET /djangoapp/get_dealers/Kansas HTTP/1.1" 200 232
+[28/Oct/2026 10:22:31] "GET /djangoapp/get_cars HTTP/1.1" 200 584

@@ -1,7 +1,14 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <!-- Link the style sheet here -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - Dealerships</title>
+  <!-- Link the style sheets here -->
+  <link rel="stylesheet" href="/static/bootstrap.min.css">
+  <link rel="stylesheet" href="/static/style.css">
 </head>
+<body>
 <div>
   <nav class="navbar navbar-expand-lg navbar-light" style="background-color:darkturquoise; height: 1in;">
     <div class="container-fluid">
@@ -25,44 +32,52 @@
     </div>
   </nav>
   
-    <div class="card" style="width: 80%;margin: auto; margin-top:5%;">
-      <div class="banner" name="about-header">
-      <!-- Insert header information here -->
-      </div>
-      <div style="display: flex;flex-direction: row; margin:auto">
-      <div class="card" style="width: 30%;">
-        <img class="card-img-top" src="/static/person.png" alt="Card image">
-        <div class="card-body">
-          <p class="title">Person1</p>
-          <p>Person1 Title</p>
-          <p class="card-text">Some text that explains the person1 in about 2 short sentences</p>
-          <p>person1@example.com</p>
+  <div class="card" style="width: 80%; margin: auto; margin-top: 5%; border: none;">
+    <div class="banner" name="about-header" style="text-align: center; margin-bottom: 2rem;">
+      <h1 style="color: #0d3b66; font-weight: bold;">About Our Leadership & Dealership Network</h1>
+      <p style="font-size: 1.15rem; color: #555; max-width: 800px; margin: auto;">
+        Welcome to Dealerships, the nation's premier automotive network connecting drivers with top-tier vehicles and trusted local dealerships. Our dedicated team is committed to transparency, excellence, and exceptional customer service.
+      </p>
+    </div>
+
+    <div style="display: flex; flex-direction: row; justify-content: space-around; flex-wrap: wrap; gap: 20px;">
+      <div class="card shadow-sm" style="width: 30%; min-width: 250px; border-radius: 12px; overflow: hidden;">
+        <img class="card-img-top" src="/static/person.png" alt="Harshal Khade" style="height: 220px; object-fit: contain; background: #eef2f5; padding: 15px;">
+        <div class="card-body" style="text-align: center;">
+          <h4 class="title" style="color: #0d3b66; font-weight: bold;">Harshal Khade</h4>
+          <p class="text-muted" style="font-weight: 600; margin-bottom: 10px;">Chief Executive Officer</p>
+          <p class="card-text" style="font-size: 0.95rem; color: #444;">
+            Harshal spearheads our nationwide automotive dealership operations and strategic vision. He brings over a decade of executive leadership focused on customer satisfaction and digital innovation.
+          </p>
+          <p style="color: #0077b6; font-weight: 500;">harshal.khade@dealerships.com</p>
         </div>
       </div>
 
-      <div class="card" style="width: 30%;">
-        <img class="card-img-top" src="/static/person.png" alt="Card image">
-        <div class="card-body">
-          <p class="title">Person2</p>
-          <p>Person2 Title</p>
-          <p class="card-text">Some text that explains the person2 in about 2 short sentences</p>
-          <p>person2@example.com</p>
+      <div class="card shadow-sm" style="width: 30%; min-width: 250px; border-radius: 12px; overflow: hidden;">
+        <img class="card-img-top" src="/static/person.png" alt="Sarah Jenkins" style="height: 220px; object-fit: contain; background: #eef2f5; padding: 15px;">
+        <div class="card-body" style="text-align: center;">
+          <h4 class="title" style="color: #0d3b66; font-weight: bold;">Sarah Jenkins</h4>
+          <p class="text-muted" style="font-weight: 600; margin-bottom: 10px;">Head of Customer Experience</p>
+          <p class="card-text" style="font-size: 0.95rem; color: #444;">
+            Sarah leads our customer feedback initiatives and dealership review quality management. She ensures every customer voice is heard and every dealership maintains five-star service standards.
+          </p>
+          <p style="color: #0077b6; font-weight: 500;">sarah.jenkins@dealerships.com</p>
         </div>
       </div>
 
-      <div class="card" style="width: 30%;">
-        <img class="card-img-top" src="/static/person.png" alt="Card image">
-        <div class="card-body">
-          <p class="title">Person3</p>
-          <p>Person3 Title</p>
-          <p class="card-text">Some text that explains the person3 in about 2 short sentences</p>
-          <p>person3@example.com</p>
+      <div class="card shadow-sm" style="width: 30%; min-width: 250px; border-radius: 12px; overflow: hidden;">
+        <img class="card-img-top" src="/static/person.png" alt="Michael Chen" style="height: 220px; object-fit: contain; background: #eef2f5; padding: 15px;">
+        <div class="card-body" style="text-align: center;">
+          <h4 class="title" style="color: #0d3b66; font-weight: bold;">Michael Chen</h4>
+          <p class="text-muted" style="font-weight: 600; margin-bottom: 10px;">Chief Technology Officer</p>
+          <p class="card-text" style="font-size: 0.95rem; color: #444;">
+            Michael designs and oversees our cloud-native dealership platform and real-time review sentiment analyzer. His architecture guarantees seamless dealer discovery and rapid microservices integration.
+          </p>
+          <p style="color: #0077b6; font-weight: 500;">michael.chen@dealerships.com</p>
         </div>
       </div>
     </div>
-    </div>
-    </div>
-    
+  </div>
 </div>
-
+</body>
 </html>
